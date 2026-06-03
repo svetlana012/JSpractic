@@ -11,7 +11,7 @@ console.log('Привет, Мир!')
 
 //РЕШЕНИЕ К ЗАДАЧЕ 1//
 
-var massedg = 'Hello'
+/* var massedg = 'Hello'
 let number = 42
 const option = true
 
@@ -24,7 +24,7 @@ if (true) {
     const option = false
 }
     
-console.log(massedg, number, option);
+console.log(massedg, number, option); */
 
 
 // ЗАДАЧА 2: Hoisting
@@ -34,18 +34,18 @@ console.log(massedg, number, option);
 // 4. Сравни поведение в консоли и объясни результат
 
 //РЕШЕНИЕ К ЗАДАЧЕ 2//
-console.log(a); //undefined - к переменным объявленным var мы можем обратиться до их объявления и присвоения значения
+/* console.log(a); //undefined - к переменным объявленным var мы можем обратиться до их объявления и присвоения значения
 var a = 22
 //console.log(b); //к переменным объявленным через let обратиться до их обявления нельзя совсем, консоль напишет, что Невозможно получить доступ к 'b' до инициализации 
 let b = 22
-//закомментировала, так как код ломался
+//закомментировала, так как код ломался */
 
 // ЗАДАЧА 3: Типы данных
 // 1. Создай переменные со значениями всех основных типов: string, number, boolean, null, undefined, object, symbol, bigint
 // 2. Выведи в консоль их типы через typeof
 
 //РЕШЕНИЕ К ЗАДАЧЕ 3//
-let str = 'Hello'
+/* let str = 'Hello'
 console.log(typeof str)
 
 let num = 152
@@ -67,7 +67,7 @@ let sym = Symbol('id')
 console.log(typeof sym)
 
 let big = 9999999999999955n
-console.log(typeof big)
+console.log(typeof big) */
 
 // ЗАДАЧА 4: Преобразования типов — базовый уровень
 // 1. Создай переменную со строкой, содержащей число, например "15"
@@ -78,7 +78,7 @@ console.log(typeof big)
 // 5. Создай переменную со значением true и попробуй выполнить с ней сложение с числом
 
 //РЕШЕНИЕ К ЗАДАЧЕ 4//
-let d = "15"
+/* let d = "15"
 let e = 10
 let t = true
 let sum1 = d + e
@@ -86,7 +86,7 @@ let sum2 = d - e
 let sum3 = t + e
 console.log(sum1) // в результате сложение строки и числа получится строка из двух переменных, неявное преобразование
 console.log(sum2) // неявное преобразование в что-то понятное для JS для вычитания, поэтому он преобразовал сам d в number из string
-console.log(sum3) // получилось число 11, потому что true преобразовывается в 1, falce в 0
+console.log(sum3) // получилось число 11, потому что true преобразовывается в 1, falce в 0 */
 
 // ЗАДАЧА 5: Неявные преобразования
 // 1. Выведи результат выражений:
@@ -98,9 +98,9 @@ console.log(sum3) // получилось число 11, потому что tru
 // 2. Проанализируй, почему получились такие результаты и объясни это
 
 //РЕШЕНИЕ К ЗАДАЧЕ 5//
-console.log("5" - 2) //неявное преобразование в числа
+/* console.log("5" - 2) //неявное преобразование в числа
 console.log("5" + 2) // неявное преобразование в строку
 console.log(true + 1) // true = 1, неявно преобразуется в число
 console.log(false == 0) // fallse = 0, неявно преобразуется в число
-console.log(null == undefined) //null и undefined равны друг другу, правило JS
+console.log(null == undefined) //null и undefined равны друг другу, правило JS */
 
