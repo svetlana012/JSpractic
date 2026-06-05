@@ -31,12 +31,12 @@ console.log(); */
 // Выведи результат в console.log
 
 //РЕШЕНИЕ К ЗАДАЧЕ 2//
-/* if (age >= 18 && hasTicket === true) {
+if (age >= 18 && hasTicket === true) {
     console.log("Можете войти!")
 }
-else if (isVIP === true || hasTicket === false) {
+else if (age >= 18 && hasTicket === true || isVIP === true) {
     console.log("Вход разрешен!")
-} */
+}
 
 // ЗАДАЧА 3: Оператор ?? (нулевое слияние)
 // Пусть есть переменная:
