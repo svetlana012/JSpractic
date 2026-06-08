@@ -47,15 +47,12 @@ console.log('Готово!'); */
 
 //РЕШЕНИЕ К ЗАДАЧЕ 4//
 /* for (let i = 1; i < 15; i++) {
-    if (i === 5) {
+    if (i === 5, i === 10) {
         continue
-    }
-    if (i === 10) {
-        continue
-    }
+    }    
     console.log(i);
-} */
-
+}
+ */
 // ЗАДАЧА 5: Вложенный цикл
 // 1. Используя два вложенных цикла for, выведи такую структуру:
 //    1
@@ -81,18 +78,16 @@ console.log('Готово!'); */
 // 5. Всё остальное выводи в console.log
 
 //РЕШЕНИЕ К ЗАДАЧЕ 6//
-/* let n = 1
-while (n <= 20) {
-    console.log(n);
+let n = 1
+while (n <= 20) {    
     n++
 
-    if (n % 4 === 0) {
-        n++;
-        continue;        
+    if (n % 4 === 0) {        
+        continue;      
     }
     if (n === 19) {
-        break
-    }    
-
-} */
+        break;
+    }
+    console.log(n);
+}
 
