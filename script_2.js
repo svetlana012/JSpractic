@@ -31,12 +31,12 @@ console.log(); */
 // Выведи результат в console.log
 
 //РЕШЕНИЕ К ЗАДАЧЕ 2//
-if (age >= 18 && hasTicket === true) {
+/* if (age >= 18 && hasTicket === true) {
     console.log("Можете войти!")
 }
 else if (age >= 18 && hasTicket === true || isVIP === true) {
     console.log("Вход разрешен!")
-}
+} */
 
 // ЗАДАЧА 3: Оператор ?? (нулевое слияние)
 // Пусть есть переменная:
@@ -109,10 +109,10 @@ switch (day) {
 
 // ЗАДАЧА 6: Тернарный оператор
 // Пусть есть переменная:
-const temperature = 15;
+// const temperature = 15;
 // 1. Используя тернарный оператор, выведи в консоль следующую строку:
 // Если температура больше 20 - выводим тепло, если меньше 20, холодно.
 
 //РЕШЕНИЕ К ЗАДАЧЕ 6//
-const message = temperature >= 20 ? 'Тепло' :  'Холодно'
-console.log(message);
+/* const message = temperature >= 20 ? 'Тепло' :  'Холодно'
+console.log(message); */
