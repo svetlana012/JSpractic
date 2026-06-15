@@ -19,11 +19,15 @@ sayHello() */
 // 3. Сделай вторую функцию multiply(a, b), где b имеет значение по умолчанию
 
 //РЕШЕНИЕ К ЗАДАЧЕ 2//
-/* function sum(a, b) {
+function sum(a, b) {
     return a + b  
 }
-const result = sum(100, 10)
-console.log(result) */
+
+function multiply(a, b = 5) {
+    return a * b
+}
+console.log(sum(5, 3));
+console.log(multiply(5));  
 
 // ЗАДАЧА 3: Область видимости
 // 1. Создай переменную outside = "Я снаружи"
