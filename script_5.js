@@ -12,7 +12,7 @@ const user = {
     city: "Москва",
 
     greet() {
-        console.log(`Привет, меня зовут ${user.name}`);        
+        console.log(`Привет, меня зовут ${user.name}`);
     }
 };
 
@@ -25,9 +25,9 @@ user.greet()
 
 //РЕШЕНИЕ К ЗАДАЧЕ 2//
 const fruits = {
-    apple: 3, 
-    banana: 5, 
-    orange: 2,    
+    apple: 3,
+    banana: 5,
+    orange: 2,
 }
 
 console.log("Ключи (названия фруктов):");
@@ -67,31 +67,55 @@ const original = {
     name: "Original",
 
     inner: {
-        x: 1, 
+        x: 1,
         y: 2
     }
 }
 const copyAssing = Object.assign({}, original)
-const copySpread = {...original} 
-original.inner.x = 5 
+const copySpread = { ...original }
+original.inner.x = 5
 
 console.log('copyAssing:', copyAssing)//результаты идентичны, копии равны
 console.log('copySpread:', copySpread)//х изменится на значение 5
 
-// ЗАДАЧА 5: Глубокое копирование
-// 1. Создай объект original с вложенным объектом inner = {x: 1, y: 2}
-// 2. Напиши рекурсивную функцию, которая глубоко копируют объект переданный в параметры и возвращает его
-// 3. Измени original.inner.x и проверь, что в копии inner.x не изменился
+// ЗАДАЧА 5: Рекурсивный вывод свойств объекта
+
+// 1. Создай объект user со свойствами:
+// name: 'Alex'
+// age: 25
+// address: {
+//   city: 'Berlin',
+//   country: 'Germany'
+// }
+// 2. Напиши рекурсивную функцию printObject(obj),
+// которая принимает объект и выводит все его свойства в консоль.
+// Ожидаемый вывод:
+// name: Alex
+// age: 25
+// city: Berlin
+// country: Germany
 
 //РЕШЕНИЕ К ЗАДАЧЕ 5//
-const original2 = {
-    name: "Original2",
-
-    inner2: {
-        x: 1, 
-        y: 2
+const user2 = {
+    name: 'Alex',
+    age: 25,
+    address: {
+        city: 'Berlin',
+        country: 'Germany'
     }
 }
+
+function printObject(obj) {
+    for (let key in obj) {
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+            printObject(obj[key])
+        }
+        else {
+            console.log(key + ': ' + obj[key])
+        }
+    }
+}
+printObject(user2)
 
 // ЗАДАЧА 6: Объединение объектов
 // 1. Создай два объекта: objA = {a:1, b:2}, objB = {b:3, c:4}
@@ -110,7 +134,7 @@ const objB = {
 const objC = Object.assign({}, objA, objB)
 console.log('Объединение Object.assign:', objC)
 
-const objD = {...objA, ...objB}
+const objD = { ...objA, ...objB }
 console.log('Объединение Spread:', objD)
 
 // ЗАДАЧА 7: Опциональная цепочка (?.)
@@ -119,13 +143,13 @@ console.log('Объединение Spread:', objD)
 // 3. Выведи результат — убедись, что ошибок нет. Если есть, как исправить?
 
 //РЕШЕНИЕ К ЗАДАЧЕ 7//
-const user2 = {
+const user3 = {
     profile: {
         email: "a@b.com",
     }
 }
-//console.log(user2.profile.phone.number) //ошибка
-console.log(user2.profile?.phone?.number) //undefined, такого свойства не существует, ошибки нет
+//console.log(user3.profile.phone.number) //ошибка
+console.log(user3.profile?.phone?.number) //undefined, такого свойства не существует, ошибки нет
 
 // ЗАДАЧА 8: Деструктуризация объектов
 // 1. Создай объект person = {name: "Alice", age: 25, city: "London"}
@@ -134,20 +158,36 @@ console.log(user2.profile?.phone?.number) //undefined, такого свойст
 
 //РЕШЕНИЕ К ЗАДАЧЕ 8//
 const person = {
-    name: "Alice", 
-    age: 25, 
+    name: "Alice",
+    age: 25,
     city: "London",
 }
-const {name, ...rest} = person
+const { name, ...rest } = person
 console.log('name: ', name)
 console.log('rest: ', rest)
 
 // ЗАДАЧА 9: Rest и Spread
-// 1. Создай функцию sumAll(...nums), которая суммирует все переданные числа
-// 2. Вызови её с разным количеством аргументов
+// 1. Напиши функцию findMax(...nums), которая принимает любое количество чисел и возвращает максимальное.
+// 2. Пример ниже:
+// console.log(findMax(1, 5, 3));      // 5
+// console.log(findMax(10, 2, 8, 15)); // 15
+// console.log(findMax(-5, -2, -10));  // -2
+
 
 //РЕШЕНИЕ К ЗАДАЧЕ 9//
 
-function sumAll(...nums) {
-    const sum = 0
+function findMax(...nums) {
+    
+    let max = nums[0]
+
+    for (let i = 1; i < nums.length; i++) {
+
+        if (nums[i] > max) {
+            max = nums[i]
+        }
+    }
+    return max;
 }
+console.log(findMax(1, 5, 3));      // 5
+console.log(findMax(10, 2, 8, 15)); // 15
+console.log(findMax(-5, -2, -10));  // -2
