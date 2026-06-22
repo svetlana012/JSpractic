@@ -1,4 +1,4 @@
-'use strike'
+"use strict"
 //console.log('Привет, Мир!')
 
 // ЗАДАЧА 1: var / let / const и области видимости
