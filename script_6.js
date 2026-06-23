@@ -129,7 +129,6 @@ const fullName = " иванов Сергей Петрович ";
 // - Всё без массивов и split!
 
 console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 6:")
-console.log("Исходная строка:", fullName);
 
 function abbreviateName(fullName) {    
 
