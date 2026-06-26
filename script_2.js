@@ -1,4 +1,4 @@
-'use strike'
+"use strict"
 
 // ЗАДАЧА 1: if / else
 // 1. С помощью prompt() спроси у пользователя число
