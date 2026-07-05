@@ -142,7 +142,6 @@ function validateString(str) {
     }
     return str.toUpperCase();
 }
-
 try {
     console.log(validateString("hello"));
     console.log(validateString(""));
