@@ -8,6 +8,7 @@
 // console.log(...) в каждом шаге
 console.log("РЕШЕНИЕ К ЗАДАНИЮ 1:")
 
+
 try {
     console.log("Начало");
     console.log(unknownVariable);
