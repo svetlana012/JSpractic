@@ -138,7 +138,7 @@ function validateString(str) {
     if (typeof str !== "string") {
         throw new Error("Ожидается строка");
     }
-    if (str === "") {
+    if (str.trim() === "") {
         throw new Error("Строка пустая");
     }
     return str.toUpperCase();
