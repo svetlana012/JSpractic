@@ -100,22 +100,22 @@ console.log('Все дети ul:', allLi);
 //РЕШЕНИЕ К ЗАДАНИЮ 6
 
 const buttonElement = document.getElementById('changeColorBtn');
+const colors = {
+    0: "#FF0000",  
+    1: "#00FF00",  
+    2: "#0000FF",  
+    3: "#FFFF00",  
+    4: "#800080",  
+    5: "#FFA500", 
+    6: "#FFC0CB",  
+    7: "#00FFFF",  
+    8: "#008080",  
+    9: "#FF4500" 
+};
 buttonElement.addEventListener('click', () => {
-    const randomNumber = Math.trunc(Math.random() * 10);    
-    const colors = {
-        0: "#FF0000",  
-        1: "#00FF00",  
-        2: "#0000FF",  
-        3: "#FFFF00",  
-        4: "#800080",  
-        5: "#FFA500", 
-        6: "#FFC0CB",  
-        7: "#00FFFF",  
-        8: "#008080",  
-        9: "#FF4500"            
-    }
-    const randomColor = colors[randomNumber];
-    card.style.background = randomColor;
+    const randomNumber = Math.trunc(Math.random() * 10); 
+    const randomColor = colors[randomNumber]; 
+    card.style.background = randomColor;             
 });
 
 /* 
@@ -164,6 +164,7 @@ liElements.forEach((li, index) => {
 const openBtn = document.getElementById('open-btn');
 const closeBtn = document.getElementById('close-btn');
 const modal = document.getElementById('my-modal');
+const confirmBtn = document.getElementById('action-btn');
 
 
 openBtn.addEventListener('click', () => {
@@ -173,6 +174,10 @@ openBtn.addEventListener('click', () => {
 closeBtn.addEventListener('click', () => {
     modal.classList.remove('open');
 });
+
+confirmBtn.addEventListener('click', () => {
+    modal.classList.remove('open');
+})
 
 /*
    ЗАДАЧА 10: Прокрутка и координаты
@@ -206,7 +211,7 @@ const btn = document.createElement('button');
 
 btn.textContent = 'Скрыть';
 
-document.body.append(btn); 
+card.after(btn); 
 
 btn.addEventListener('click', () => {
     myCard.classList.toggle('hidden');
@@ -241,7 +246,9 @@ btn.addEventListener('click', () => {
 class TodoApp {
     constructor() {
         this.input = document.getElementById('todo-input');
+        this.input.classList.add('todo-input')
         this.addBtn = document.getElementById('add-btn');
+        this.addBtn.classList.add('add-btn')
         this.todoList = document.getElementById('todo-list');
 
         this.addBtn.addEventListener('click', () => this.addTask());
@@ -265,10 +272,7 @@ class TodoApp {
             li.classList.toggle('done');
         });
                 
-        deleteBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
-            li.remove();
-        });
+        
 
         li.append(span);
         li.append(deleteBtn);
@@ -277,6 +281,13 @@ class TodoApp {
 
         this.input.value = '';
         this.input.focus();
+    }
+
+    deleteTask() {
+        deleteBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            li.remove();
+        });
     }
 }
 
