@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>JSPractic</title>
 </head>
+
 <body>
+    <button id="changeColorBtn">Нажми меня</button>
     
-    
-    
-    <script src="./script_12.js" type="module"></script>
-        
+    <button id="open-btn">Открыть окно</button>
+
+    <div id="my-modal" class="modal">
+        <div class="modal-box">
+            <button class="close-btn" id="close-btn">×</button>
+            <h2>Заголовок окна</h2>
+            <p>Тут должен быть текст. Ля-ля-ля жу-жу-жу.
+            </p>
+            <div class="modal-footer">
+                <button class="action-btn">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="todo-container">
+        Список задач:
+        <input type="text" id="todo-input" placeholder="Введите задачу">
+        <button id="add-btn">Добавить</button>
+        <ul id="todo-list" class="todo-list">
+            <li></li>            
+        </ul>
+    </div>
+
+    <script src="./script_13.js" type="module"></script>
+
     </script>
 </body>
+
 </html>
