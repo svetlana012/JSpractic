@@ -159,25 +159,23 @@ liElements.forEach((li, index) => {
    2. Как оно выглядит можно посмотреть в интернете, выбрать понравившуюся реализацию и постараться реализовать 
       функционал открытия и закрытия модального окна. Без ИИ и без копипаста с интернета.
 */
+
 //РЕШЕНИЕ К ЗАДАНИЮ 9
 
 const openBtn = document.getElementById('open-btn');
-const closeBtn = document.getElementById('close-btn');
 const modal = document.getElementById('my-modal');
-const confirmBtn = document.getElementById('action-btn');
 
 
 openBtn.addEventListener('click', () => {
     modal.classList.add('open');
 });
 
-closeBtn.addEventListener('click', () => {
-    modal.classList.remove('open');
+document.addEventListener('click', (e) => {
+    const closeBtn = e.target.closest('.js-close-modal');
+    if (closeBtn && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+    }
 });
-
-confirmBtn.addEventListener('click', () => {
-    modal.classList.remove('open');
-})
 
 /*
    ЗАДАЧА 10: Прокрутка и координаты
@@ -245,14 +243,22 @@ btn.addEventListener('click', () => {
 
 class TodoApp {
     constructor() {
-        this.input = document.getElementById('todo-input');
-        this.input.classList.add('todo-input')
-        this.addBtn = document.getElementById('add-btn');
-        this.addBtn.classList.add('add-btn')
-        this.todoList = document.getElementById('todo-list');
+        this.init();
+        this.addStyleJs();
+        this.addEnterListener();
+    }
 
-        this.addBtn.addEventListener('click', () => this.addTask());
-        
+    init() {
+        this.input = document.getElementById('todo-input');        
+        this.addBtn = document.getElementById('add-btn');
+        this.todoList = document.getElementById('todo-list');               
+    }
+
+    addStyleJs () {
+        this.input.classList.add('js-todo-input')
+        this.addBtn.classList.add('js-add-btn')
+        this.addBtn.addEventListener('click', () => this.addTask());  
+             
     }
 
     addTask() {
@@ -267,23 +273,25 @@ class TodoApp {
 
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = '✖';
+        deleteBtn.classList.add('js-delete-btn');
         
         span.addEventListener('click', () => {
             li.classList.toggle('done');
-        });
-                
-        
+        });       
 
         li.append(span);
         li.append(deleteBtn);
 
         this.todoList.append(li);
 
+        this.deleteTask(li);
+
         this.input.value = '';
         this.input.focus();
     }
 
-    deleteTask() {
+    deleteTask(li) {
+        const deleteBtn = li.querySelector('.js-delete-btn');
         deleteBtn.addEventListener('click', (event) => {
             event.stopPropagation();
             li.remove();
