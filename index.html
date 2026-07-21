@@ -9,28 +9,23 @@
 </head>
 
 <body>
-    <button id="changeColorBtn">Нажми меня</button>
+    <!--<button id="changeColorBtn">Нажми меня</button>
     
-    <button id="open-btn">Открыть окно</button>
-
-    <div id="my-modal" class="modal">
-        <div class="modal-box">
-            <button class="js-close-modal close">Закрыть</button>
-            <h2>Заголовок окна</h2>
-            <p>Тут должен быть текст. Ля-ля-ля жу-жу-жу.
-            </p>
-            <div class="modal-footer">
-                <button class="js-close-modal">Подтвердить</button>
-            </div>
-        </div>
-    </div>
+    <button id="open-btn">Открыть окно</button>-->
 
     <div class="todo-container">
-        Список задач:
-        <input type="text" id="todo-input" placeholder="Введите задачу">
-        <button id="add-btn">Добавить</button>
+        <h2>Список задач</h2>
+        <div class="todo-input-wrapper">
+            <input type="text" id="todo-input" placeholder="Введите задачу...">
+            <button id="add-btn">Добавить</button>
+        </div>
+        <div class="text-reference">
+            <div class="reference">*чтобы отметить задачу как выполненную, нажмите на неё.</div>
+            <div class="reference">**чтобы удалить задачу, нажмите на значек крестика справа.</div>
+        </div>
+
         <ul id="todo-list" class="todo-list">
-            <li></li>            
+            
         </ul>
     </div>
 

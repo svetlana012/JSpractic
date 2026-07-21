@@ -16,10 +16,10 @@
 */
 //РЕШЕНИЕ К ЗАДАНИЮ 1
 
-const newCard = document.createElement("div");
+/* const newCard = document.createElement("div");
 newCard.classList.add('card');
 newCard.textContent = 'Это динамически созданный блок';
-document.body.appendChild(newCard);
+document.body.appendChild(newCard); */
 
 /* 
    ЗАДАЧА 2: Изменение стилей элемента
@@ -32,11 +32,11 @@ document.body.appendChild(newCard);
 
 //РЕШЕНИЕ К ЗАДАНИЮ 2
 
-const card = document.querySelector('.card');
+/* const card = document.querySelector('.card');
 card.style.padding = '20px';
 card.style.background = '#f0f0f0';
 card.style.borderRadius = '10px';
-card.style.marginBottom = '20px';
+card.style.marginBottom = '20px'; */
 
 /* 
    ЗАДАЧА 3: Работа с атрибутами
@@ -48,10 +48,10 @@ card.style.marginBottom = '20px';
 
 //РЕШЕНИЕ К ЗАДАНИЮ 3
 
-const newImg = document.createElement("img");
+/* const newImg = document.createElement("img");
 newImg.src = 'https://via.placeholder.com/150';
 newImg.alt = 'Картинка';
-document.body.appendChild(newImg);
+document.body.appendChild(newImg); */
 
 /*
    ЗАДАЧА 4: Добавление нескольких элементов из массива
@@ -62,14 +62,14 @@ document.body.appendChild(newImg);
 */
 //РЕШЕНИЕ К ЗАДАНИЮ 4
 
-const newItem = ["Пункт 1", "Пункт 2", "Пункт 3"];
+/* const newItem = ["Пункт 1", "Пункт 2", "Пункт 3"];
 const newUl = document.createElement("ul");
 newItem.forEach(item => {
     const newLi = document.createElement("li");
     newLi.textContent = item;
     newUl.appendChild(newLi);
 });
-document.body.appendChild(newUl);
+document.body.appendChild(newUl); */
 
 /* 
    ЗАДАЧА 5: Навигация по DOM
@@ -82,13 +82,13 @@ document.body.appendChild(newUl);
 */
 //РЕШЕНИЕ К ЗАДАНИЮ 5
 
-const ul = document.querySelector('ul');
+/* const ul = document.querySelector('ul');
 const firstLi = ul.firstElementChild;
 console.log('Первый li:', firstLi);
 const lastLi = ul.lastElementChild;
 console.log('Последний li:', lastLi);
 const allLi = ul.children;
-console.log('Все дети ul:', allLi);
+console.log('Все дети ul:', allLi); */
 
 
 /* 
@@ -99,7 +99,7 @@ console.log('Все дети ul:', allLi);
 
 //РЕШЕНИЕ К ЗАДАНИЮ 6
 
-const buttonElement = document.getElementById('changeColorBtn');
+/* const buttonElement = document.getElementById('changeColorBtn');
 const colors = {
     0: "#FF0000",  
     1: "#00FF00",  
@@ -116,7 +116,7 @@ buttonElement.addEventListener('click', () => {
     const randomNumber = Math.trunc(Math.random() * 10); 
     const randomColor = colors[randomNumber]; 
     card.style.background = randomColor;             
-});
+}); */
 
 /* 
    ЗАДАЧА 7: Удаление элементов
@@ -126,7 +126,7 @@ buttonElement.addEventListener('click', () => {
 
 //РЕШЕНИЕ К ЗАДАНИЮ 7
 
-const liElement = document.querySelectorAll('li');
+/* const liElement = document.querySelectorAll('li');
 liElement.forEach(li => {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Удалить'; 
@@ -134,7 +134,7 @@ liElement.forEach(li => {
     deleteButton.addEventListener('click', () => {
         li.remove();
     });
-});
+}); */
 
 /*
    ЗАДАЧА 8: dataset
@@ -143,7 +143,7 @@ liElement.forEach(li => {
 */
 
 //РЕШЕНИЕ К ЗАДАНИЮ 8
-console.log("\nРЕШЕНИЕ К ЗАДАНИЮ 8: нажмите на любой li, чтобы увидеть его data-id в консоли");
+/* console.log("\nРЕШЕНИЕ К ЗАДАНИЮ 8: нажмите на любой li, чтобы увидеть его data-id в консоли");
 
 const liElements = document.querySelectorAll('li');
 liElements.forEach((li, index) => {
@@ -151,7 +151,7 @@ liElements.forEach((li, index) => {
     li.addEventListener('click', () => {
         console.log('data-id:', li.dataset.id);
     })
-});
+}); */
 
 /*
    ЗАДАЧА 9: Создание модального окна (простая версия)
@@ -162,7 +162,7 @@ liElements.forEach((li, index) => {
 
 //РЕШЕНИЕ К ЗАДАНИЮ 9
 
-const openBtn = document.getElementById('open-btn');
+/* const openBtn = document.getElementById('open-btn');
 const modal = document.getElementById('my-modal');
 
 
@@ -175,7 +175,7 @@ document.addEventListener('click', (e) => {
     if (closeBtn && modal.classList.contains('open')) {
         modal.classList.remove('open');
     }
-});
+}); */
 
 /*
    ЗАДАЧА 10: Прокрутка и координаты
@@ -185,7 +185,7 @@ document.addEventListener('click', (e) => {
 */
 
 //РЕШЕНИЕ К ЗАДАНИЮ 10
-console.log("\nРЕШЕНИЕ К ЗАДАНИЮ 10:");
+/* console.log("\nРЕШЕНИЕ К ЗАДАНИЮ 10:");
 
 const block = document.createElement('div');
 block.style.height = '3000px';
@@ -194,7 +194,7 @@ document.body.appendChild(block);
 
 window.addEventListener('scroll', () => {
     console.log('Количество пикселей:', window.scrollY);
-});
+}); */
 
 /*
    ЗАДАЧА 11: Работа с классами через classList
@@ -204,7 +204,7 @@ window.addEventListener('scroll', () => {
 */
 //РЕШЕНИЕ К ЗАДАНИЮ 11
 
-const myCard = document.querySelector('.card');
+/* const myCard = document.querySelector('.card');
 const btn = document.createElement('button');
 
 btn.textContent = 'Скрыть';
@@ -219,7 +219,7 @@ btn.addEventListener('click', () => {
     } else {
         btn.textContent = 'Скрыть';
     }
-});
+}); */
 
 
 /*
