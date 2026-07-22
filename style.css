@@ -58,6 +58,38 @@ body {
     padding: 20px;
 }
 
+.js-task-text-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.js-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;   
+}
+
+
+.js-error-message {
+    color: #e53e3e;
+    font-size: 14px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #fff5f5;
+    border-radius: 8px;
+    border: 1px solid #fc8181;
+    animation: slideIn 0.3s ease;
+}
+
+
+#todo-input.error {
+    border-color: #fc8181;
+    background: #fff5f5;
+}
+
 .todo-container {
     background: #ffffff;
     border-radius: 16px;
@@ -135,25 +167,14 @@ body {
     transform: translateY(0);
 }
 
-.text-reference {
-    padding-bottom: 10px;
-}
-
-.reference {
-    color: #a0aec0;
-    font-size: 12px;   
-}
-
 .todo-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.todo-list li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.js-task-item {
+    display: flex;    
     padding: 14px 18px;
     margin-bottom: 10px;
     background: #f7fafc;
@@ -165,25 +186,34 @@ body {
 }
 
 .todo-list li:hover {
-    background: #edf2f7;
-    transform: translateX(4px);
+    background: #edf2f7;    
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.todo-list li span {
+.js-task-text {
     flex: 1;
     font-size: 16px;
     color: #2d3748;
     transition: all 0.3s ease;
-    cursor: pointer;
+    word-break: break-word;
+    padding: 2px 0;
     user-select: none;
-    padding: 4px 0;
+    padding-left: 10px;
 }
 
 
-.todo-list li.done span {
+.js-task-item.done .js-task-text {
     text-decoration: line-through;
     color: #a0aec0;
+}
+
+.js-task-item.done .js-task-text {
+    text-decoration: line-through;
+    color: #a0aec0;
+}
+
+.js-task-item.done .js-task-checkbox {
+    accent-color: #48bb78;
 }
 
 .todo-list li.done {
@@ -203,6 +233,8 @@ body {
     border-radius: 6px;
     transition: all 0.3s ease;
     line-height: 1;
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 .js-delete-btn:hover {

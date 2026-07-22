@@ -243,60 +243,249 @@ btn.addEventListener('click', () => {
 
 class TodoApp {
     constructor() {
-        this.init();
-        this.addStyleJs();
-        this.addEnterListener();
+        this.initializeVariables();
+        this.addStyles();
+        this.addEventListeners();
     }
 
-    init() {
-        this.input = document.getElementById('todo-input');        
+    // Метод для инициализации переменных
+    initializeVariables() {
+        this.input = document.getElementById('todo-input');
         this.addBtn = document.getElementById('add-btn');
-        this.todoList = document.getElementById('todo-list');               
+        this.todoList = document.getElementById('todo-list');
+        this.tasks = [];
     }
 
-    addStyleJs () {
-        this.input.classList.add('js-todo-input')
-        this.addBtn.classList.add('js-add-btn')
-        this.addBtn.addEventListener('click', () => this.addTask());  
-             
+    // Метод для добавления стилей
+    addStyles() {
+        this.input.classList.add('js-todo-input');
+        this.addBtn.classList.add('js-add-btn');
     }
 
-    addTask() {
-        const taskText = this.input.value.trim();
+    // Метод для добавления всех обработчиков событий
+    addEventListeners() {
+        this.addBtn.addEventListener('click', () => this.handleAddTask());
+        this.input.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                this.handleAddTask();
+            }
+        });
+    }
 
-        if (!taskText) return;
+    // Метод для обработки добавления задачи
+    handleAddTask() {
+        const taskText = this.getTaskText();
+        
+        // Проверка на пустую строку
+        if (!this.isValidTask(taskText)) {
+            this.showError('Пожалуйста, введите текст задачи');
+            return;
+        }
 
+        // Проверка на дубликат
+        if (this.isTaskExists(taskText)) {
+            this.showError('Задача с таким названием уже существует');
+            this.clearInput();
+            this.focusInput();
+            return;
+        }
+
+        const taskElement = this.createTaskElement(taskText);
+        this.addTaskToList(taskElement);
+        this.addTaskToArray(taskText);
+        this.clearInput();
+        this.focusInput();
+        this.hideError();
+    }
+
+    // Метод для получения текста задачи
+    getTaskText() {
+        return this.input.value.trim();
+    }
+
+    // Метод для валидации задачи
+    isValidTask(taskText) {
+        return taskText !== '';
+    }
+
+    // Метод для проверки существования задачи
+    isTaskExists(taskText) {
+        // Проверяем все элементы списка
+        const taskElements = this.todoList.querySelectorAll('.js-task-text');
+        for (let element of taskElements) {
+            if (element.textContent.toLowerCase() === taskText.toLowerCase()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Метод для добавления задачи в массив
+    addTaskToArray(taskText) {
+        this.tasks.push(taskText);
+    }
+
+    // Метод для отображения ошибки
+    showError(message) {
+        // Удаляем старую ошибку, если есть
+        this.hideError();
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.classList.add('js-error-message');
+        errorDiv.textContent = message;
+        errorDiv.style.color = '#e53e3e';
+        errorDiv.style.fontSize = '14px';
+        errorDiv.style.marginTop = '8px';
+        errorDiv.style.padding = '8px 12px';
+        errorDiv.style.background = '#fff5f5';
+        errorDiv.style.borderRadius = '8px';
+        errorDiv.style.border = '1px solid #fc8181';
+        errorDiv.style.animation = 'slideIn 0.3s ease';
+        
+        // Вставляем ошибку после поля ввода
+        this.input.parentNode.insertBefore(errorDiv, this.input.nextSibling);
+        
+        // Добавляем красную рамку полю ввода
+        this.input.style.borderColor = '#fc8181';
+        this.input.style.background = '#fff5f5';
+    }
+
+    // Метод для скрытия ошибки
+    hideError() {
+        const errorElement = document.querySelector('.js-error-message');
+        if (errorElement) {
+            errorElement.remove();
+        }
+        // Возвращаем нормальный стиль полю ввода
+        this.input.style.borderColor = '#e2e8f0';
+        this.input.style.background = '#f7fafc';
+    }
+
+    // Метод для создания элемента задачи
+    createTaskElement(taskText) {
         const li = document.createElement('li');
+        li.classList.add('js-task-item');
+        
+        const checkbox = this.createCheckbox();
+        const taskDiv = this.createTaskDiv(taskText);
+        const deleteBtn = this.createDeleteButton();
 
-        const span = document.createElement('span');
-        span.textContent = taskText;
+        const checkboxWrapper = this.createCheckboxWrapper();
+        checkboxWrapper.append(checkbox);
 
+        const textContainer = this.createTextContainer();
+        textContainer.append(taskDiv);
+
+        this.addToggleCompletionHandler(checkbox, li, taskDiv);
+        this.addDeleteHandler(deleteBtn, li);
+
+        li.append(checkboxWrapper);
+        li.append(textContainer);
+        li.append(deleteBtn);
+
+        return li;
+    }
+
+    // Метод для создания обертки чекбокса
+    createCheckboxWrapper() {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('js-checkbox-wrapper');
+        return wrapper;
+    }
+
+    // Метод для создания контейнера текста задачи
+    createTextContainer() {
+        const container = document.createElement('div');
+        container.classList.add('js-task-text-container');
+        return container;
+    }
+
+    // Метод для создания чекбокса
+    createCheckbox() {
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.classList.add('js-task-checkbox');
+        return checkbox;
+    }
+
+    // Метод для создания div элемента с текстом задачи
+    createTaskDiv(taskText) {
+        const taskDiv = document.createElement('div');
+        taskDiv.textContent = taskText;
+        taskDiv.classList.add('js-task-text');
+        return taskDiv;
+    }
+
+    // Метод для создания кнопки удаления
+    createDeleteButton() {
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = '✖';
         deleteBtn.classList.add('js-delete-btn');
-        
-        span.addEventListener('click', () => {
-            li.classList.toggle('done');
-        });       
-
-        li.append(span);
-        li.append(deleteBtn);
-
-        this.todoList.append(li);
-
-        this.deleteTask(li);
-
-        this.input.value = '';
-        this.input.focus();
+        return deleteBtn;
     }
 
-    deleteTask(li) {
-        const deleteBtn = li.querySelector('.js-delete-btn');
-        deleteBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
-            li.remove();
+    // Метод для добавления обработчика переключения статуса задачи
+    addToggleCompletionHandler(checkbox, li, taskDiv) {
+        checkbox.addEventListener('change', (event) => {
+            this.toggleTaskCompletion(event, li, taskDiv);
         });
+    }
+
+    // Метод для переключения статуса выполнения задачи
+    toggleTaskCompletion(event, li, taskDiv) {
+        const isChecked = event.target.checked;
+        
+        if (isChecked) {
+            li.classList.add('done');
+            taskDiv.style.textDecoration = 'line-through';
+            taskDiv.style.opacity = '0.6';
+        } else {
+            li.classList.remove('done');
+            taskDiv.style.textDecoration = 'none';
+            taskDiv.style.opacity = '1';
+        }
+    }
+
+    // Метод для добавления обработчика удаления задачи
+    addDeleteHandler(deleteBtn, li) {
+        deleteBtn.addEventListener('click', (event) => {
+            this.handleDeleteTask(event, li);
+        });
+    }
+
+    // Метод для обработки удаления задачи
+    handleDeleteTask(event, li) {
+        event.stopPropagation();
+        this.removeTask(li);
+    }
+
+    // Метод для удаления задачи
+    removeTask(li) {
+        // Удаляем задачу из массива
+        const taskText = li.querySelector('.js-task-text').textContent;
+        const index = this.tasks.indexOf(taskText);
+        if (index !== -1) {
+            this.tasks.splice(index, 1);
+        }
+        li.remove();
+        this.hideError();
+    }
+
+    // Метод для добавления задачи в список
+    addTaskToList(taskElement) {
+        this.todoList.append(taskElement);
+    }
+
+    // Метод для очистки поля ввода
+    clearInput() {
+        this.input.value = '';
+    }
+
+    // Метод для фокусировки на поле ввода
+    focusInput() {
+        this.input.focus();
     }
 }
 
+// Создание экземпляра приложения
 new TodoApp();
