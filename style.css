@@ -164,8 +164,7 @@ li div {
     color: #1f2937;
 }
 
-.btn--operator,
-.btn--equals {
+.js-btn-operator {
     background: linear-gradient(180deg, #f59e0b 0%, #f97316 100%);
     color: #ffffff;
 }

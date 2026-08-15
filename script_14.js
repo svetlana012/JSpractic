@@ -7,7 +7,7 @@
    3. При клике выводи в консоль "Кнопка нажата!"
 */
 
-console.log("РЕШЕНИЕ К ЗАДАНИЮ 1:");
+//console.log("РЕШЕНИЕ К ЗАДАНИЮ 1:");
 
 /* const button = document.getElementById("btn");
 button.addEventListener("click", () => {
@@ -21,7 +21,7 @@ button.addEventListener("click", () => {
         - Второй — "Второй обработчик"
 */
 
-console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 2:");
+//console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 2:");
 
 /* const button = document.getElementById("btn");
 button.addEventListener("click", () => {
@@ -37,7 +37,7 @@ button.addEventListener("click", () => {
    2. Добавь её как обработчик click к кнопке
    3. После 3 кликов на эту кнопку, сделай removeEventListener
 */
-console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 3:");
+//console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 3:");
 
 /* function handleClick() {
     console.log("Кнопка нажата!");
@@ -61,7 +61,7 @@ button.addEventListener("click", () => {
    2. Добавь каждому обработчик click
    3. Сделайт так, чтобы при клике на inner срабатывал обработчик inner, родители срабатывать не должны
 */
-console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 4:");
+//console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 4:");
 
 /* const outerDiv = document.getElementById("outer");
 const middleDiv = document.getElementById("middle");
@@ -85,7 +85,7 @@ innerDiv.addEventListener("click", (event) => {
    2. Добавь один обработчик click на ul
    3. Если клик по li — выводи текст li
 */
-console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 5:");
+//console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 5:");
 
 /* const ul = document.getElementById("todo-list");
 ul.addEventListener("click", (event) => {
@@ -101,7 +101,7 @@ ul.addEventListener("click", (event) => {
     - Ctrl + Shift + X → вывести "Комбо!"
 */
 
-console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 6:");
+//console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 6:");
 
 /* document.addEventListener("keydown", (event) => {
 
@@ -124,7 +124,7 @@ console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 6:");
    1. Создай квадрат 50×50
    2. На стрелки ↑ ↓ ← → двигая квадрат на 10px
 */
-console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 7:");
+//console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 7:");
 
 /* const square = document.getElementById("square");
 const step = 10;
@@ -162,236 +162,31 @@ document.addEventListener("keydown", (event) => {
 */
 console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 8:");
 
+
+
 class Calculator {
-   constructor() {
-      // Находим элементы DOM
-      this.display = document.getElementById('display');
-      this.buttons = document.querySelectorAll('.js-btn');
+   constructor() {      
+      this.digits = document.querySelectorAll(".js-btn-digit");
+      this.operations = document.querySelectorAll(".js-btn-operator");
 
-      // Инициализируем состояние
-      this.currentValue = '0';
-      this.previousValue = '';
-      this.operation = null;
-      this.expression = '';
-      this.shouldResetDisplay = false;
-
-      // Подписываемся на события
-      this.bindEvents();
-
-      // Показываем начальное значение
-      this.updateDisplay();
-   }
-
-   //  НОРМАЛИЗАЦИЯ КЛАВИШ 
-   normalizeKey(key) {
-      if (key === '/') return '÷';
-      if (key === '*') return '×';
-      if (key === '-') return '−';
-      return key;
-   }
-
-   //  ПОДПИСКА НА СОБЫТИЯ 
-   bindEvents() {
-      this.buttons.forEach((button) => {
+      document.querySelectorAll('.js-btn-digit').forEach(button => {
          button.addEventListener('click', () => {
-            this.handleInput(button.dataset.value);
-         });
-      });
+            const value = button.dataset.value;
+            console.log(`Нажата цифра: ${value}`);
+         })
+      })
 
-      // Клавиатура
-      document.addEventListener('keydown', (event) => {
-         const key = event.key;
-         const normalized = this.normalizeKey(key);
+      document.querySelectorAll('.js-btn-operator').forEach(button => {
+         button.addEventListener('click', () => {
+            const value = button.dataset.value;
+            console.log(`Нажата операция: ${value}`);
+         })
+      })
 
-         // Цифры
-         if (key >= '0' && key <= '9') {
-            this.handleInput(key);
-            return;
-         }
+      const digits = document.querySelectorAll(".js-btn-digit")
+      const operations = document.querySelectorAll(".js-btn-operator")
 
-         // Операторы и спецсимволы
-         const operations = {
-            '+': '+',
-            '−': '−',
-            '×': '×',
-            '÷': '÷',
-            '=': '=',
-            'Enter': '=',
-            '=': '=',
-            'Backspace': '⌫',
-            'Delete': 'C',
-            'Escape': 'C',
-            'c': 'C',
-            'C': 'C',
-            '%': '%'
-         };
-
-         if (operations[key]) {
-            event.preventDefault();
-            this.handleInput(operations[key]);
-         }
-      });
    }
-
-   // ГЛАВНЫЙ ОБРАБОТЧИК 
-   handleInput(value) {
-      const operations = {
-         '+': '+',
-         '−': '−',
-         '×': '×',
-         '÷': '÷',
-         '=': '=',
-         'C': 'C',
-         '⌫': '⌫',
-         '%': '%'
-      }
-
-      if (value in operations) {
-         switch (value) {
-            case '+':
-            case '−':
-            case '×':
-            case '÷':
-               this.setOperation(value);
-               break;
-            case '=':
-               this.calculate();
-               break;
-            case 'C':
-               this.clear();
-               break;
-            case '⌫':
-               this.backspace();
-               break;
-            case '%':
-               this.percent();
-               break;
-         }
-         this.updateDisplay();
-      } else {
-         this.inputDigit(value);
-         this.updateDisplay();
-      }
-   }
-
-   inputDigit(value) {
-      if (this.shouldResetDisplay) {
-         this.currentValue = '';
-         
-         this.shouldResetDisplay = false;
-      }
-
-      if (value === '.' && this.currentValue.includes('.')) return;
-
-      if (this.currentValue === '0' && value !== '.') {
-         this.currentValue = value;
-      } else {
-         this.currentValue += value;
-      }
-
-      
-   }
-
-   // УСТАНОВКА ОПЕРАЦИИ 
-   setOperation(op) {
-      // Если уже есть операция — вычисляем цепочку
-      if (this.operation && !this.shouldResetDisplay) {
-         this.calculate();
-      }
-      this.previousValue = this.currentValue;
-      this.operation = op;
-      this.shouldResetDisplay = true;
-      this.expression = this.previousValue + ' ' + op + ' ';
-   }
-
-   // ВЫЧИСЛЕНИЕ 
-   calculate() {
-      if (!this.operation || !this.previousValue) return;
-
-      const prev = parseFloat(this.previousValue);
-      const curr = parseFloat(this.currentValue);
-      let result;
-      const expr = this.previousValue + ' ' + this.operation + ' ' + this.currentValue;
-
-      const operations = {
-         '+': (a, b) => a + b,
-         '−': (a, b) => a - b,
-         '×': (a, b) => a * b,
-         '÷': (a, b) => a / b
-      }
-
-      if (this.operation === '÷' && curr === 0) {
-         this.currentValue = 'Ошибка';
-         this.operation = null;
-         this.previousValue = '';
-         this.shouldResetDisplay = true;
-         this.expression = expr + ' = Ошибка';
-         return;
-      }
-
-      result = operations[this.operation](prev, curr);
-
-      // плавающая точка: округляем до 10 знаков после запятой
-      result = Math.round(result * 1e10) / 1e10;
-      this.expression = expr + ' = ' + String(result);
-      this.currentValue = String(result);
-      this.operation = null;
-      this.previousValue = '';      
-      this.shouldResetDisplay = true;
-   }
-
-   //  ОЧИСТКА 
-   clear() {
-      this.currentValue = '0';
-      this.previousValue = '';
-      this.operation = null;
-      this.shouldResetDisplay = false;
-      this.expression = '';
-   }
-
-   // УДАЛЕНИЕ ПОСЛЕДНЕГО СИМВОЛА
-   backspace() {
-      if (this.shouldResetDisplay) return;
-      this.currentValue = this.currentValue.length <= 1 ? '0' : this.currentValue.slice(0, -1);
-   }
-
-   // СМЕНА ЗНАКА
-   toggleSign() {
-      if (this.currentValue === '0') return;
-      this.currentValue = this.currentValue.startsWith('-')
-         ? this.currentValue.slice(1)
-         : '-' + this.currentValue;
-   }
-
-   // ПРОЦЕНТ 
-   percent() {
-      const num = parseFloat(this.currentValue);
-      if (!isNaN(num)) {
-         this.currentValue = String(num / 100);
-      }
-   }
-
-   // ОБНОВЛЕНИЕ ДИСПЛЕЯ 
-   updateDisplay() {
-
-      if (this.expression && !this.shouldResetDisplay) {
-         this.display.value = this.expression + this.currentValue;
-      }
-      else if (this.expression && this.shouldResetDisplay) {
-         this.display.value = this.expression;
-      }
-      else {
-         const maxLength = 12;
-         let displayValue = this.currentValue;
-         if (displayValue.length > maxLength) {
-            displayValue = displayValue.slice(0, maxLength);
-         }
-         this.display.value = displayValue;
-      }
-   };
 };
-
-// Запуск 
-document.addEventListener('DOMContentLoaded', () => {
-   new Calculator();
-});
+new Calculator();
+console.log("калькулятор подключен");
