@@ -165,10 +165,18 @@ console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 8:");
 
 
 class Calculator {
-   constructor() {      
-      this.digits = document.querySelectorAll(".js-btn-digit");
-      this.operations = document.querySelectorAll(".js-btn-operator");
+   constructor() {
+      this.digits = document.querySelectorAll(".js-btn-digit")
+      this.operations = document.querySelectorAll(".js-btn-operator")
+      const operations = document.querySelectorAll(".js-btn-operator")
+      this.init()
+   }
 
+   init() {
+      this.bindEvents();
+   }
+
+   bindEvents() {
       document.querySelectorAll('.js-btn-digit').forEach(button => {
          button.addEventListener('click', () => {
             const value = button.dataset.value;
@@ -182,10 +190,6 @@ class Calculator {
             console.log(`Нажата операция: ${value}`);
          })
       })
-
-      const digits = document.querySelectorAll(".js-btn-digit")
-      const operations = document.querySelectorAll(".js-btn-operator")
-
    }
 };
 new Calculator();
