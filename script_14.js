@@ -167,8 +167,7 @@ console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 8:");
 class Calculator {
    constructor() {
       this.digits = document.querySelectorAll(".js-btn-digit")
-      this.operations = document.querySelectorAll(".js-btn-operator")
-      const operations = document.querySelectorAll(".js-btn-operator")
+      this.operations = document.querySelectorAll(".js-btn-operator")      
       this.init()
    }
 
