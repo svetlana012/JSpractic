@@ -167,28 +167,61 @@ console.log("\n\nРЕШЕНИЕ К ЗАДАНИЮ 8:");
 class Calculator {
    constructor() {
       this.digits = document.querySelectorAll(".js-btn-digit")
-      this.operations = document.querySelectorAll(".js-btn-operator")      
+      this.operations = document.querySelectorAll(".js-btn-operator")
+      this.clearButton = document.querySelector(".js-btn-clear")
+      
+      this.display = document.querySelector(".js-display")       
+      this.currentValue = "0";
+      this.previousValue = null;
+      this.operation = null;      
+
       this.init()
    }
 
    init() {
       this.bindEvents();
+      this.updateDisplay();
+      
    }
 
    bindEvents() {
       this.digits.forEach(button => {
          button.addEventListener('click', () => {
             const value = button.dataset.value;
-            console.log(`Нажата цифра: ${value}`)
+            this.inputDigit(value);
+            this.updateDisplay();
          })
       })
 
       this.operations.forEach(button => {
          button.addEventListener('click', () => {
             const value = button.dataset.value;
-            console.log(`Нажата операция: ${value}`);
+            console.log(`Операция: ${value}`);
          })
       })
+
+      this.clearButton.addEventListener('click', () => {
+         this.clear();
+      })
+   }
+
+   updateDisplay() {
+      this.display.value = this.currentValue;
+   }
+
+   inputDigit(digit) {
+      if (this.currentValue === "0" && digit !== "0") {
+         this.currentValue = digit;
+      } else {
+         this.currentValue += digit;
+      }      
+   }
+
+   clear() {
+      this.currentValue = "0";
+      this.previousValue = null;
+      this.operation = null;
+      this.updateDisplay();
    }
 };
 new Calculator();
