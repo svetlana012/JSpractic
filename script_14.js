@@ -169,11 +169,11 @@ class Calculator {
       this.digits = document.querySelectorAll(".js-btn-digit")
       this.operations = document.querySelectorAll(".js-btn-operator")
       this.clearButton = document.querySelector(".js-btn-clear")
-      
-      this.display = document.querySelector(".js-display")       
+
+      this.display = document.querySelector(".js-display")
       this.currentValue = "0";
       this.previousValue = null;
-      this.operation = null;      
+      this.operation = null;
 
       this.init()
    }
@@ -181,7 +181,7 @@ class Calculator {
    init() {
       this.bindEvents();
       this.updateDisplay();
-      
+
    }
 
    bindEvents() {
@@ -212,17 +212,18 @@ class Calculator {
    inputDigit(digit) {
       if (this.currentValue === "0" && digit !== "0") {
          this.currentValue = digit;
-      } else {
-         this.currentValue += digit;
-      }      
+         return;
+      }
+      this.currentValue += digit;
    }
+}
 
-   clear() {
-      this.currentValue = "0";
-      this.previousValue = null;
-      this.operation = null;
-      this.updateDisplay();
-   }
+clear() {
+   this.currentValue = "0";
+   this.previousValue = null;
+   this.operation = null;
+   this.updateDisplay();
+}
 };
 new Calculator();
 console.log("калькулятор подключен");
