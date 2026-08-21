@@ -176,14 +176,14 @@ class Calculator {
    }
 
    bindEvents() {
-      document.querySelectorAll('.js-btn-digit').forEach(button => {
+      this.digits.forEach(button => {
          button.addEventListener('click', () => {
             const value = button.dataset.value;
-            console.log(`Нажата цифра: ${value}`);
+            console.log(`Нажата цифра: ${value}`)
          })
       })
 
-      document.querySelectorAll('.js-btn-operator').forEach(button => {
+      this.operations.forEach(button => {
          button.addEventListener('click', () => {
             const value = button.dataset.value;
             console.log(`Нажата операция: ${value}`);
