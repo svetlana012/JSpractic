@@ -202,7 +202,11 @@ class Calculator {
         if (["+", "−", "*", "/"].includes(value)) {
           this.setOperator(value);
           return;
-        }        
+        }   
+        if (value === "=") {
+        this.calculate();
+        return;
+        }     
         this.updateDisplay();
       });
     });
@@ -247,6 +251,48 @@ class Calculator {
     this.previousValue = this.currentValue;
     this.operation = op;
     this.currentValue = "0";
+  }
+
+  calculate() {
+    if(this.operation || this.previousValue === null) {
+      return
+    }
+
+    const previous = Number(this.previousValue)
+    const current = Number(this.currentValue)
+
+    let result
+
+    if (this.operation === "/" && current === 0) {
+      this.currentValue = "Ошибка"
+      this.previousValue = null
+      this.operation = null
+      this.updateDisplay()
+      return;
+    }
+
+    switch (this.operation) {
+      case "+":
+        result = previous + current;
+        break;
+
+      case "−":
+        result = previous - current;
+        break;
+
+      case "*":
+        result = previous * current;
+        break;
+
+      case "/":
+        result = previous / current;
+        break;
+    }
+
+    this.currentValue = String(result);
+    this.previousValue = null;
+    this.operation = null;
+    this.updateDisplay();
   }
 }
 
