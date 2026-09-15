@@ -192,11 +192,17 @@ class Calculator {
     this.operations.forEach((button) => {
       button.addEventListener("click", () => {
         const value = button.dataset.value;
+        if (value === "") {
+          return;
+        }
         if (value === "⌫") {
           this.backspace();
-        } else if (["+", "−", "*", "/"].includes(value)) {
-          this.setOperator(value);
+          return;
         }
+        if (["+", "−", "*", "/"].includes(value)) {
+          this.setOperator(value);
+          return;
+        }        
         this.updateDisplay();
       });
     });
@@ -238,9 +244,9 @@ class Calculator {
   }
 
   setOperator(op) {
-   this.previousValue = this.currentValue;
-   this.operation = op;
-   this.currentValue = "0";
+    this.previousValue = this.currentValue;
+    this.operation = op;
+    this.currentValue = "0";
   }
 }
 
