@@ -8,27 +8,73 @@
     <title>JSPractic</title>
 </head>
 
-<body>  
+<body class="body">
 
-    <div class="container">
+    <!-- <button id="btn">Нажми меня</button>
 
+    <div id="outer" class="outer" style="background-color: lightblue; padding: 20px;">outer
+        <div id="middle" class="middle" style="background-color: lightgreen; padding: 20px;">middle
+            <div id="inner" class="inner" style="background-color: lightcoral; padding: 20px;">inner
+                Внутренний блок
+            </div>
+        </div>
+    </div>
+
+     div class="container">
         <h1>Список дел</h1>
-
         <div class="input-box">
             <input type="text" id="todo-input" placeholder="Введите новую задачу">
-
             <button id="add-btn">
                 Добавить
             </button>
         </div>
-
         <ul id="todo-list"></ul>
+    </div> 
 
+    <div class="todo">
+        <ul id="todo-list" class="todo__list">
+            <li class="todo__item">Элемент 1</li>
+            <li class="todo__item">Элемент 2</li>
+            <li class="todo__item">Элемент 3</li>
+        </ul>
     </div>
 
-    <script src="./script_13.js" type="module"></script>
+    <div class="square" id="square"></div> -->
 
-    </script>
+
+    <div class="calculator">
+        <h1>Калькулятор</h1>
+        <input class="js-display" type="text" id="display" disabled>
+        <div class="buttons">
+            <button class="btn js-btn-operator js-btn-clear" data-value="C">C</button>            
+            <button class="btn js-btn-operator" data-value="/">/</button>
+            <button class="btn js-btn-operator" data-value="⌫">⌫</button>
+            <button class="btn js-btn-operator" data-value="=">=</button>
+
+            <button class="btn js-btn-digit" data-value="7">7</button>
+            <button class="btn js-btn-digit" data-value="8">8</button>
+            <button class="btn js-btn-digit" data-value="9">9</button>
+            <button class="btn js-btn-operator" data-value="*">*</button>
+
+            <button class="btn js-btn-digit" data-value="4">4</button>
+            <button class="btn js-btn-digit" data-value="5">5</button>
+            <button class="btn js-btn-digit" data-value="6">6</button>
+            <button class="btn js-btn-operator" data-value="−">−</button>
+
+            <button class="btn js-btn-digit" data-value="1">1</button>
+            <button class="btn js-btn-digit" data-value="2">2</button>
+            <button class="btn js-btn-digit" data-value="3">3</button>
+            <button class="btn js-btn-operator" data-value="+">+</button>
+
+            <button class="btn js-btn-digit" data-value="0">0</button>            
+            
+            
+        </div>
+
+
+        <script src="./script_14.js" type="module"></script>
+
+        </script>
 </body>
 
 </html>
