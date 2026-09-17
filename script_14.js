@@ -197,6 +197,7 @@ class Calculator {
         }
         if (value === "⌫") {
           this.backspace();
+          this.updateDisplay();
           return;
         }
         if (["+", "−", "*", "/"].includes(value)) {
@@ -254,7 +255,7 @@ class Calculator {
   }
 
   calculate() {
-    if(this.operation || this.previousValue === null) {
+    if(this.operation === null || this.previousValue === null) {
       return
     }
 
