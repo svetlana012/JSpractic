@@ -218,6 +218,10 @@ class Calculator {
   }
 
   updateDisplay() {
+    if (this.previousValue !== null && this.operation !== null) {
+      this.display.value = this.previousValue + " " + this.operation + " " + this.currentValue;
+      return;
+    }
     this.display.value = this.currentValue;
   }
 
