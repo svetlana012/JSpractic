@@ -171,6 +171,7 @@ class Calculator {
     this.currentValue = "0";
     this.previousValue = null;
     this.operation = null;
+    this.waitingForOperand = false;
 
     this.init();
   }
@@ -197,12 +198,17 @@ class Calculator {
         }
         if (value === "⌫") {
           this.backspace();
+          this.updateDisplay();
           return;
         }
         if (["+", "−", "*", "/"].includes(value)) {
           this.setOperator(value);
           return;
-        }        
+        }
+        if (value === "=") {
+          this.calculate();
+          return;
+        }
         this.updateDisplay();
       });
     });
@@ -213,10 +219,27 @@ class Calculator {
   }
 
   updateDisplay() {
+    if (this.previousValue !== null && this.operation !== null) {
+      if (this.currentValue === this.previousValue) {
+        this.display.value = this.previousValue + " " + this.operation;
+        return;
+      }
+
+      this.display.value =
+        this.previousValue + " " + this.operation + " " + this.currentValue;
+      return;
+    }
+
     this.display.value = this.currentValue;
   }
 
   inputDigit(digit) {
+    if (this.waitingForOperand) {
+      this.currentValue = digit;
+      this.waitingForOperand = false;
+      return;
+    }
+
     if (this.currentValue === "0") {
       if (digit === "0") {
         return;
@@ -233,6 +256,7 @@ class Calculator {
     this.currentValue = "0";
     this.previousValue = null;
     this.operation = null;
+    this.waitingForOperand = false;
     this.updateDisplay();
   }
 
@@ -246,7 +270,51 @@ class Calculator {
   setOperator(op) {
     this.previousValue = this.currentValue;
     this.operation = op;
-    this.currentValue = "0";
+    this.currentValue = this.previousValue;
+    this.waitingForOperand = true;
+    this.updateDisplay();
+  }
+
+  calculate() {
+    if (this.operation === null || this.previousValue === null) {
+      return;
+    }
+
+    const previous = Number(this.previousValue);
+    const current = Number(this.currentValue);
+
+    let result;
+
+    if (this.operation === "/" && current === 0) {
+      this.currentValue = "Ошибка";
+      this.previousValue = null;
+      this.operation = null;
+      this.updateDisplay();
+      return;
+    }
+
+    switch (this.operation) {
+      case "+":
+        result = previous + current;
+        break;
+
+      case "−":
+        result = previous - current;
+        break;
+
+      case "*":
+        result = previous * current;
+        break;
+
+      case "/":
+        result = previous / current;
+        break;
+    }
+
+    this.currentValue = String(result);
+    this.previousValue = null;
+    this.operation = null;
+    this.updateDisplay();
   }
 }
 
