@@ -220,7 +220,7 @@ class Calculator {
 
   updateDisplay() {
     if (this.previousValue !== null && this.operation !== null) {
-      if (this.currentValue === this.previousValue) {
+      if (this.waitingForOperand) {
         this.display.value = this.previousValue + " " + this.operation;
         return;
       }
@@ -269,8 +269,7 @@ class Calculator {
 
   setOperator(op) {
     this.previousValue = this.currentValue;
-    this.operation = op;
-    this.currentValue = this.previousValue;
+    this.operation = op;    
     this.waitingForOperand = true;
     this.updateDisplay();
   }
