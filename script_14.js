@@ -221,12 +221,11 @@ class Calculator {
   updateDisplay() {
     if (this.previousValue !== null && this.operation !== null) {
       if (this.waitingForOperand) {
-        this.display.value = this.previousValue + " " + this.operation;
+        this.display.value = `${this.previousValue} ${this.operation}`;
         return;
       }
 
-      this.display.value =
-        this.previousValue + " " + this.operation + " " + this.currentValue;
+      this.display.value = `${this.previousValue} ${this.operation} ${this.currentValue}`;
       return;
     }
 
