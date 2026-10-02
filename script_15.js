@@ -35,43 +35,45 @@ makeFetch("https://jsonplaceholder.typicode.com/todos/1")
 class Posts {
   #posts = [];
 
+  constructor() {
+    this.addButton("js-get-posts");
+  }
+
   getPosts() {
-    fetch("https://jsonplaceholder.typicode.com/posts")    
+    fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((data) => {
-        this.#posts = data
+        this.#posts = data;
 
         this.showPosts();
       })
 
       .catch((error) => {
-      console.log(`Ошибка: ${error}`);
-    })
+        console.log(`Ошибка: ${error}`);
+      });
   }
 
-  addButton(buttonClass) {    
-    const button = document.querySelector(`.${buttonClass}`)
-    button.addEventListener('click', () => {
+  addButton(buttonClass) {
+    const button = document.querySelector(`.${buttonClass}`);
+    button.addEventListener("click", () => {
       this.getPosts();
-    })
+    });
   }
 
   showPosts() {
     if (this.#posts.length > 0) {
       this.#posts.forEach((post) => {
-        const card = document.createElement("div")
-        card.classList.add("js-card")
+        const card = document.createElement("div");
+        card.classList.add("js-card");
 
         card.innerHTML = `
         <h2>${post.title}</h2>
         <p>${post.body}</p>
-        `
+        `;
 
-        document.body.append(card)
-      })
+        document.body.append(card);
+      });
     }
   }
 }
-
 const posts = new Posts();
-posts.addButton("js-get-posts");
