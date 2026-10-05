@@ -14,7 +14,7 @@
 class TodoApp {
   todos = [];
   originalTodos = [];
-  sortState = 0;
+  sortState = "default";
 
   constructor() {
     this.input = document.getElementById("todo-input");
@@ -23,7 +23,7 @@ class TodoApp {
 
     this.sortButton = document.getElementById("sort-btn");
 
-    if (!this.input || !this.addButton || !this.list) {
+    if (!this.input || !this.addButton || !this.list || !this.sortButton) {
       console.error("Ошибка: не найдены элементы на странице!");
       return;
     }
@@ -63,16 +63,12 @@ class TodoApp {
 
   toggleTask(id) {
     this.todos = this.todos.map((item) =>
-      item.id === id 
-        ? { ...item, isCompleted: !item.isCompleted } 
-        : item
+      item.id === id ? { ...item, isCompleted: !item.isCompleted } : item,
     );
 
     this.originalTodos = this.originalTodos.map((item) =>
-        item.id === id
-        ? { ...item, isCompleted: !item.isCompleted } 
-        : item
-    )
+      item.id === id ? { ...item, isCompleted: !item.isCompleted } : item,
+    );
 
     this.renderTodos();
     this.saveTodos();
@@ -80,7 +76,7 @@ class TodoApp {
 
   deleteTask(id) {
     this.todos = this.todos.filter((item) => item.id !== id);
-    this.originalTodos = this.originalTodos.filter((item) => item.id !== id)
+    this.originalTodos = this.originalTodos.filter((item) => item.id !== id);
     this.renderTodos();
     this.saveTodos();
   }
@@ -127,7 +123,13 @@ class TodoApp {
   }
 
   loadTodos() {
-    const savedTodos = JSON.parse(localStorage.getItem("todos"));
+    let savedTodos = null;
+
+    try {
+      savedTodos = JSON.parse(localStorage.getItem("todos"));
+    } catch (error) {
+      console.log("Ошибка JSON:", error);
+    }
 
     if (savedTodos != null) {
       this.todos = savedTodos;
@@ -137,21 +139,24 @@ class TodoApp {
   }
 
   changeSortState() {
-    this.sortState++;
-
-    if (this.sortState > 2) {
-      this.sortState = 0;
+    if (this.sortState === "default") {
+        this.sortState = "ascending";
+    } else if (this.sortState === "ascending") {
+        this.sortState = "descending";
+    } else {
+        this.sortState = "default";
     }
+
     this.sortTodos();
     this.renderTodos();
   }
 
   sortTodos() {
-    if (this.sortState === 0) {
+    if (this.sortState === "default") {
       this.todos = [...this.originalTodos];
     }
 
-    if (this.sortState === 1) {
+    if (this.sortState === "ascending") {
       this.todos.sort((a, b) => {
         if (a.isCompleted === false && b.isCompleted === true) {
           return -1;
@@ -163,7 +168,7 @@ class TodoApp {
       });
     }
 
-    if (this.sortState === 2) {
+    if (this.sortState === "descending") {
       this.todos.sort((a, b) => {
         if (a.isCompleted === true && b.isCompleted === false) {
           return -1;
