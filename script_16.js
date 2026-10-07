@@ -13,14 +13,12 @@
 
 class TodoApp {
   todos = [];
-  originalTodos = [];
   sortState = "default";
 
   constructor() {
     this.input = document.getElementById("todo-input");
     this.addButton = document.getElementById("add-btn");
     this.list = document.getElementById("todo-list");
-
     this.sortButton = document.getElementById("sort-btn");
 
     if (!this.input || !this.addButton || !this.list || !this.sortButton) {
@@ -37,11 +35,13 @@ class TodoApp {
         this.addTask();
       }
     });
+
     this.loadTodos();
   }
 
   addTask() {
     const taskText = this.input.value.trim();
+
     if (!taskText) {
       return;
     }
@@ -54,10 +54,9 @@ class TodoApp {
 
     this.todos.push(task);
 
-    this.originalTodos.push(task);
-
     this.input.value = "";
-    this.renderTodos();
+
+    this.renderTodos(this.todos);
     this.saveTodos();
   }
 
@@ -66,31 +65,28 @@ class TodoApp {
       item.id === id ? { ...item, isCompleted: !item.isCompleted } : item,
     );
 
-    this.originalTodos = this.originalTodos.map((item) =>
-      item.id === id ? { ...item, isCompleted: !item.isCompleted } : item,
-    );
-
-    this.renderTodos();
+    this.renderTodos(this.todos);
     this.saveTodos();
   }
 
   deleteTask(id) {
     this.todos = this.todos.filter((item) => item.id !== id);
-    this.originalTodos = this.originalTodos.filter((item) => item.id !== id);
-    this.renderTodos();
+
+    this.renderTodos(this.todos);
     this.saveTodos();
   }
 
-  renderTodos() {
+  renderTodos(todos = this.todos) {
     this.list.innerHTML = "";
 
-    this.todos.forEach((item) => {
+    todos.forEach((item) => {
       const li = document.createElement("li");
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = item.isCompleted;
       checkbox.className = "js-task-checkbox";
+
       checkbox.addEventListener("change", (event) => {
         event.stopPropagation();
         this.toggleTask(item.id);
@@ -98,14 +94,17 @@ class TodoApp {
 
       const taskText = document.createElement("div");
       taskText.textContent = item.message;
+
       if (item.isCompleted) {
         taskText.classList.add("js-done");
       }
+
       taskText.addEventListener("click", () => this.toggleTask(item.id));
 
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "Удалить";
       deleteBtn.className = "js-delete-btn";
+
       deleteBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         this.deleteTask(item.id);
@@ -114,6 +113,7 @@ class TodoApp {
       li.appendChild(checkbox);
       li.appendChild(taskText);
       li.appendChild(deleteBtn);
+
       this.list.appendChild(li);
     });
   }
@@ -133,51 +133,66 @@ class TodoApp {
 
     if (savedTodos != null) {
       this.todos = savedTodos;
-      this.originalTodos = [...savedTodos];
     }
+
     this.renderTodos();
   }
 
   changeSortState() {
     if (this.sortState === "default") {
-        this.sortState = "ascending";
-    } else if (this.sortState === "ascending") {
-        this.sortState = "descending";
-    } else {
-        this.sortState = "default";
+      this.sortState = "ascending";
+      this.sortTodos();
+      return;
     }
 
-    this.sortTodos();
-    this.renderTodos();
+    if (this.sortState === "ascending") {
+      this.sortState = "descending";
+      this.sortTodos();
+      return;
+    }
+
+    if (this.sortState === "descending") {
+      this.sortState = "default";
+      this.sortTodos();
+      return;
+    }
   }
 
   sortTodos() {
     if (this.sortState === "default") {
-      this.todos = [...this.originalTodos];
+      this.renderTodos(this.todos);
     }
 
     if (this.sortState === "ascending") {
-      this.todos.sort((a, b) => {
+      const sortedTodos = [...this.todos].sort((a, b) => {
         if (a.isCompleted === false && b.isCompleted === true) {
           return -1;
         }
+
         if (a.isCompleted === true && b.isCompleted === false) {
           return 1;
         }
+
         return 0;
       });
+
+      this.renderTodos(sortedTodos);
     }
 
     if (this.sortState === "descending") {
-      this.todos.sort((a, b) => {
+      const sortedTodos = [...this.todos].sort((a, b) => {
         if (a.isCompleted === true && b.isCompleted === false) {
           return -1;
         }
+
         if (a.isCompleted === false && b.isCompleted === true) {
           return 1;
         }
+
         return 0;
       });
+
+      this.renderTodos(sortedTodos);
     }
   }
 }
